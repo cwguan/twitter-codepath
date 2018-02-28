@@ -11,6 +11,7 @@ import Foundation
 class User {
     
     var name: String
+    static var current: User?
     
     init(dictionary: [String: Any]) {
         name = dictionary["name"] as! String
