@@ -23,14 +23,15 @@ class TweetCell: UITableViewCell {
         didSet {
             tweetTextLabel.text = tweet.text
             retweetCountLabel.text = String(tweet.retweetCount)
-            favoriteCountLabel.text = String(describing: tweet.favoriteCount)
+            favoriteCountLabel.text = String(tweet.favoriteCount!)
             
             tweeterNameLabel.text = tweet.user.name
-            usernameLabel.text = tweet.user.screenName
+            usernameLabel.text = "@" + tweet.user.screenName!
             
             dateLabel.text = tweet.createdAtString
             
-            profileImageView.af_setImage(withURL: tweet.user.profileImageURL!)
+            let profileURL = tweet.user.profileImageURL!
+            profileImageView.af_setImage(withURL: profileURL)
         }
     }
     
