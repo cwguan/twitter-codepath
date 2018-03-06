@@ -37,10 +37,47 @@ class TweetCell: UITableViewCell {
     
     
     @IBAction func onRetweet(_ sender: Any) {
+        if (tweet.retweeted != true) {
+            tweet.retweeted = true
+            tweet.retweetCount += 1
+            
+            APIManager.shared.retweet(tweet) { (tweet: Tweet?, error: Error?) in
+                if let  error = error {
+                    print("Error favoriting tweet: \(error.localizedDescription)")
+                } else if let tweet = tweet {
+                    print("Successfully retweeted the following Tweet: \n\(tweet.text)")
+                }
+            }
+            refreshData()
+            
+        } else {
+            print("Already retweeted")
+        }
     }
     
     
     @IBAction func onFavorite(_ sender: Any) {
+        if (tweet.favorited != true) {
+            tweet.favorited = true
+            tweet.favoriteCount! += 1
+            
+            APIManager.shared.favorite(tweet) { (tweet: Tweet?, error: Error?) in
+                if let  error = error {
+                    print("Error favoriting tweet: \(error.localizedDescription)")
+                } else if let tweet = tweet {
+                    print("Successfully favorited the following Tweet: \n\(tweet.text)")
+                }
+            }
+            refreshData()
+        } else {
+            print("Already favorited")
+        }
+    }
+    
+    
+    func refreshData() {
+        retweetCountLabel.text = String(tweet.retweetCount)
+        favoriteCountLabel.text = String(tweet.favoriteCount!)
     }
     
     
