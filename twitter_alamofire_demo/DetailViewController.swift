@@ -16,35 +16,45 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var authorNameLabel: UILabel!
     @IBOutlet weak var authorUsernameLabel: UILabel!
     @IBOutlet weak var tweetTextLabel: UILabel!
+    @IBOutlet weak var retweetCountLabel: UILabel!
+    @IBOutlet weak var favoriteCountLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    
+    @IBOutlet weak var replyButton: UIButton!
+    @IBOutlet weak var retweetButton: UIButton!
+    @IBOutlet weak var favoriteButton: UIButton!
+    
     
     var tweet: Tweet!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tweetTextLabel.text = tweet.text
-//        if (tweet.retweeted == true) {
-//            retweetButton.setTitle("Un-Retweet", for: .normal)
-//        } else {
-//            retweetButton.setTitle("Retweet", for: .normal)
-//        }
-//        retweetCountLabel.text = String(tweet.retweetCount)
-//
-//
-//        if (tweet.favorited == true) {
-//            favoriteButton.setTitle("Un-Favorite", for: .normal)
-//        } else {
-//            favoriteButton.setTitle("Favorite", for: .normal)
-//        }
-//        favoriteCountLabel.text = String(tweet.favoriteCount!)
+        
+        let profileURL = tweet.user.profileImageURL!
+        authorImageView.af_setImage(withURL: profileURL)
         
         authorNameLabel.text = tweet.user.name
         authorUsernameLabel.text = "@" + tweet.user.screenName!
         
-//        dateLabel.text = tweet.createdAtString
+        tweetTextLabel.text = tweet.text
         
-        let profileURL = tweet.user.profileImageURL!
-        authorImageView.af_setImage(withURL: profileURL)
+        dateLabel.text = tweet.createdAtString
+        
+        if (tweet.retweeted == true) {
+            retweetButton.setImage(#imageLiteral(resourceName: "retweet-icon-green"), for: .normal)
+        } else {
+            retweetButton.setImage(#imageLiteral(resourceName: "retweet-icon"), for: .normal)
+        }
+        retweetCountLabel.text = String(tweet.retweetCount)
+
+
+        if (tweet.favorited == true) {
+            favoriteButton.setImage(#imageLiteral(resourceName: "favor-icon-red"), for: .normal)
+        } else {
+            favoriteButton.setImage(#imageLiteral(resourceName: "favor-icon"), for: .normal)
+        }
+        favoriteCountLabel.text = String(tweet.favoriteCount!)
 
     }
 

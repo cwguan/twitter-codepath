@@ -27,17 +27,17 @@ class TweetCell: UITableViewCell {
             tweetTextLabel.text = tweet.text
             
             if (tweet.retweeted == true) {
-                retweetButton.setTitle("Un-Retweet", for: .normal)
+                retweetButton.setImage(#imageLiteral(resourceName: "retweet-icon-green"), for: .normal)
             } else {
-                retweetButton.setTitle("Retweet", for: .normal)
+                retweetButton.setImage(#imageLiteral(resourceName: "retweet-icon"), for: .normal)
             }
             retweetCountLabel.text = String(tweet.retweetCount)
             
             
             if (tweet.favorited == true) {
-                favoriteButton.setTitle("Un-Favorite", for: .normal)
+                favoriteButton.setImage(#imageLiteral(resourceName: "favor-icon-red"), for: .normal)
             } else {
-                favoriteButton.setTitle("Favorite", for: .normal)
+                favoriteButton.setImage(#imageLiteral(resourceName: "favor-icon"), for: .normal)
             }
             favoriteCountLabel.text = String(tweet.favoriteCount!)
             
@@ -61,7 +61,7 @@ class TweetCell: UITableViewCell {
                     print("Successfully retweeted the following Tweet: \n\(tweet.text)")
                     self.tweet.retweeted = true
                     self.tweet.retweetCount += 1
-                    self.retweetButton.setTitle("Un-Retweet", for: .normal)
+                    self.retweetButton.setImage(#imageLiteral(resourceName: "retweet-icon-green"), for: .normal)
                     self.refreshData()
                 }
             }
@@ -74,7 +74,7 @@ class TweetCell: UITableViewCell {
                     print("Successfully un-retweeted the following Tweet: \n\(tweet.text)")
                     self.tweet.retweeted = false
                     self.tweet.retweetCount -= 1
-                    self.retweetButton.setTitle("Retweet", for: .normal)
+                    self.retweetButton.setImage(#imageLiteral(resourceName: "retweet-icon"), for: .normal)
                     self.refreshData()
                 }
             }
@@ -92,7 +92,7 @@ class TweetCell: UITableViewCell {
                     print("Successfully favorited the following Tweet: \n\(tweet.text)")
                     self.tweet.favorited = true
                     self.tweet.favoriteCount! += 1
-                    self.favoriteButton.setTitle("Unfavorite", for: .normal)
+                    self.favoriteButton.setImage(#imageLiteral(resourceName: "favor-icon-red"), for: .normal)
                     self.refreshData()
                 }
             }
@@ -105,7 +105,7 @@ class TweetCell: UITableViewCell {
                     print("Successfully unfavorited the following Tweet: \n\(tweet.text)")
                     self.tweet.favorited = false
                     self.tweet.favoriteCount! -= 1
-                    self.favoriteButton.setTitle("Favorite", for: .normal)
+                    self.favoriteButton.setImage(#imageLiteral(resourceName: "favor-icon"), for: .normal)
                     self.refreshData()
                 }
             }
