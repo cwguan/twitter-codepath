@@ -198,6 +198,7 @@
                                 <action selector="didTapLogout:" destination="5YO-Vh-39k" id="fM7-h5-mq1"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="edit-icon" id="V10-l5-0n7"/>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="Ctl-bI-Eag" id="igH-cX-XMH"/>
@@ -323,6 +324,24 @@
             </objects>
             <point key="canvasLocation" x="2823.1999999999998" y="36.431784107946029"/>
         </scene>
+        <!--Compose View Controller-->
+        <scene sceneID="6cS-pz-YbQ">
+            <objects>
+                <viewController id="x8k-FQ-jDq" customClass="ComposeViewController" customModule="twitter_alamofire_demo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="G3Q-GI-YfD"/>
+                        <viewControllerLayoutGuide type="bottom" id="D07-Zr-iWZ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Cyq-PS-lY1">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="k3V-u8-mLW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2724" y="745"/>
+        </scene>
         <!--Timeline-->
         <scene sceneID="WXZ-z8-8LI">
             <objects>
@@ -363,6 +382,7 @@
     </scenes>
     <resources>
         <image name="TwitterLogoBlue" width="200" height="200"/>
+        <image name="edit-icon" width="30" height="27"/>
         <image name="favor-icon" width="30" height="30"/>
         <image name="home-icon" width="30" height="30"/>
         <image name="reply-icon" width="30" height="30"/>
