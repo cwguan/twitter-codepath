@@ -17,6 +17,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
     
     var delegate: ComposeViewControllerDelegate?
 
+    @IBOutlet weak var characterCountLabel: UILabel!
     @IBOutlet weak var authorImageView: UIImageView!
     @IBOutlet weak var authorNameLabel: UILabel!
     @IBOutlet weak var authorUsernameLabel: UILabel!
@@ -30,6 +31,15 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
     
     
     @IBAction func onPost(_ sender: Any) {
+        APIManager.shared.composeTweet(with: composeTextView.text) { (tweet, error) in
+            if let error = error {
+                print("Error composing Tweet: \(error.localizedDescription)")
+            } else if let tweet = tweet {
+                self.delegate?.did(post: tweet)
+                print("Compose Tweet Success!")
+                self.dismiss(animated: true, completion: nil)
+            }
+        }
     }
     
     
@@ -41,6 +51,9 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
         
         let profileURL = user.profileImageURL!
         authorImageView.af_setImage(withURL: profileURL)
+        
+        composeTextView.layer.borderColor = UIColor.lightGray.cgColor
+        composeTextView.layer.borderWidth = 1.0
 
         // Do any additional setup after loading the view.
     }
@@ -58,6 +71,8 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
         let newText = NSString(string: textView.text!).replacingCharacters(in: range, with: text)
         
         // TODO: Update Character Count Label
+        let characterCount = 140 - newText.characters.count
+        characterCountLabel.text = String(characterCount)
         
         // The new text should be allowed? True/False
         return newText.characters.count < characterLimit

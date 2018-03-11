@@ -84,7 +84,14 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func did(post: Tweet) {
-        
+        APIManager.shared.getHomeTimeLine { (tweets, error) in
+            if let tweets = tweets {
+                self.tweets = tweets
+                self.tableView.reloadData()
+            } else if let error = error {
+                print("Error getting home timeline: " + error.localizedDescription)
+            }
+        }
     }
     
     
@@ -92,6 +99,7 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         if (segue.identifier == "composeSegue") {
             let composeViewController = segue.destination as! ComposeViewController
             composeViewController.user = User.current
+            composeViewController.delegate = self
             
         } else {
             let cell = sender as! UITableViewCell
