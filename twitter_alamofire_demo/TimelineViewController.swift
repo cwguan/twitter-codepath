@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TimelineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class TimelineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ComposeViewControllerDelegate {
     
     var tweets: [Tweet] = []
     
@@ -80,14 +80,27 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let cell = sender as! UITableViewCell
-        if let indexPath = tableView.indexPath(for: cell) {
-            let tweet = tweets[indexPath.row]
-            let detailViewController = segue.destination as! DetailViewController
-            detailViewController.tweet = tweet
-        }
+    @IBAction func didTapCompose(_ sender: Any) {
+    }
+    
+    func did(post: Tweet) {
         
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "composeSegue") {
+            let composeViewController = segue.destination as! ComposeViewController
+            composeViewController.user = User.current
+            
+        } else {
+            let cell = sender as! UITableViewCell
+            if let indexPath = tableView.indexPath(for: cell) {
+                let tweet = tweets[indexPath.row]
+                let detailViewController = segue.destination as! DetailViewController
+                detailViewController.tweet = tweet
+            }
+        }
     }
     
     
